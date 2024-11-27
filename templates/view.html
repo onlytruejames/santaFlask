@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find out</title>
+    <script>
+        async function view(person){
+            const jsonData = {person: person, key: "{{key}}"};
+            const options = {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json' // Set content type to JSON
+              },
+              body: JSON.stringify(jsonData) // Convert JSON data to a string and set it as the request body
+            };
+            fetch('/query/', options)
+              .then(response => {
+                // Check if the request was successful
+                if (!response.ok) {
+                  location.reload();
+                }
+                // Parse the response as JSON
+                return response.json();
+              })
+              .then(data => {
+                // Handle the JSON data
+                text = `<h1>${data.gifter} is giving a present to ${data.gifted}</h1><p>If you have clicked on the wrong person, everyone needs a new link now.</p>`;
+                document.getElementById("main").innerHTML = text;
+              })
+              .catch(error => {
+                // Handle any errors that occurred during the fetch
+                console.error('Fetch error:', error);
+            });
+        }
+    </script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="centre" id="main">
+        <h1>Find out</h1>
+        <p>Once you find out who you're giving a gift to, you will not be able to see it again or see who anybody else is giving a gift to. So only click yours.</p>
+        {% for person in people %}
+            <button onclick="view('{{person}}')">{{person}}</button>
+        {% endfor %}
+    </div>
+</body>
+</html>
