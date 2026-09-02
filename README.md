@@ -1,7 +1,7 @@
 # santaFlask
 Online Secret Santa (OSS) which is also Open Source Software (OSS)
 
-I'm hosting this at https://santa.sodit.xyz
+I'm hosting this at https://santa.resampler.xyz
 
 ## *Requirements*
 Flask
